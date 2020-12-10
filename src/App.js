@@ -44,68 +44,68 @@ const App = () => {
       )
     : [];
 
-  const AddBlog = (event) => {
-    event.preventDefault();
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url,
-      likes: likes,
-    };
+  // const AddBlog = (event) => {
+  //   event.preventDefault();
+  //   const blogObject = {
+  //     title: title,
+  //     author: author,
+  //     url: url,
+  //     likes: likes,
+  //   };
 
-    const check = blogs.find(
-      (blog) => blog.name.toLowerCase() === title.toLowerCase()
-    );
+  //   const check = blogs.find(
+  //     (blog) => blog.name.toLowerCase() === title.toLowerCase()
+  //   );
 
-    if (check) {
-      window.confirm(
-        `${title} is already added to phonebook, replace old number with a new one?`
-      )
-        ? service
-            .update(check.id, blogObject)
-            .then((response) => {
-              setBlogs(
-                blogs.map((blog) => (blog.id !== response.id ? blog : response))
-              );
-              setMessageType("success");
-              setMessage(`${title} has been updated`);
-              setTimeout(() => {
-                setMessage(null);
-              }, 5000);
-            })
-            .catch((error) => {
-              setMessageType("error");
-              setMessage(
-                `Information of ${title} has already been removed from server!`
-              );
-              setTimeout(() => {
-                setMessage(null);
-              }, 5000);
-              setBlogs(blogs.filter((blog) => blog.id !== check.id));
-            })
-        : console.log("");
-    }
+  //   if (check) {
+  //     window.confirm(
+  //       `${title} is already added to phonebook, replace old number with a new one?`
+  //     )
+  //       ? service
+  //           .update(check.id, blogObject)
+  //           .then((response) => {
+  //             setBlogs(
+  //               blogs.map((blog) => (blog.id !== response.id ? blog : response))
+  //             );
+  //             setMessageType("success");
+  //             setMessage(`${title} has been updated`);
+  //             setTimeout(() => {
+  //               setMessage(null);
+  //             }, 5000);
+  //           })
+  //           .catch((error) => {
+  //             setMessageType("error");
+  //             setMessage(
+  //               `Information of ${title} has already been removed from server!`
+  //             );
+  //             setTimeout(() => {
+  //               setMessage(null);
+  //             }, 5000);
+  //             setBlogs(blogs.filter((blog) => blog.id !== check.id));
+  //           })
+  //       : console.log("");
+  //   }
 
-    service
-      .create({
-        title: title,
-        author: author,
-        url: url,
-        likes: likes,
-      })
-      .then((response) => {
-        setBlogs(blogs.concat(response));
-      });
-    setTitle("");
-    setAuthor("");
-    setUrl("");
-    setLikes("");
-    setMessageType("success");
-    setMessage(`Added ${title}`);
-    setTimeout(() => {
-      setMessage(null);
-    }, 5000);
-  };
+  //   service
+  //     .create({
+  //       title: title,
+  //       author: author,
+  //       url: url,
+  //       likes: likes,
+  //     })
+  //     .then((response) => {
+  //       setBlogs(blogs.concat(response));
+  //     });
+  //   setTitle("");
+  //   setAuthor("");
+  //   setUrl("");
+  //   setLikes("");
+  //   setMessageType("success");
+  //   setMessage(`Added ${title}`);
+  //   setTimeout(() => {
+  //     setMessage(null);
+  //   }, 5000);
+  // };
 
   const deleteBlogs = (id, titles) => {
     window.confirm(`Delete ${titles}?`)
@@ -136,6 +136,58 @@ const App = () => {
             setBlogs(blogs.filter((blog) => blog.id !== id));
           })
       : console.log();
+  };
+
+  const AddBlog = (event) => {
+    event.preventDefault();
+    const bloglist = blogs.find(
+      (blog) => blog.title.toLowerCase() === title.toLowerCase()
+    );
+    if (bloglist) {
+      const choice = window.confirm(
+        `${title} is already added to phonebook, replace the old number with a new one?`
+      );
+      if (choice) {
+        service
+          .update(bloglist.id, {
+            title: title,
+            author: author,
+            url: url,
+            likes: likes,
+          })
+          .then((res) => {
+            setBlogs(blogs.map((blog) => (blog.id !== res.id ? blog : res)));
+            setMessageType("success");
+            setMessage(`Changed ${bloglist.title}`);
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      service
+        .create({
+          title: title.trim(),
+          author: author.trim(),
+          url: url.trim(),
+          likes: likes.trim(),
+        })
+        .then((blog) => {
+          setBlogs([...blogs, blog]);
+          setMessageType("success");
+          setMessage(`Added ${blog.title}`);
+        })
+        .catch((err) => {
+          setMessageType("error");
+          setMessage(`${err.response.data.error}`);
+        });
+    }
+    setTitle("");
+    setAuthor("");
+    setUrl("");
+    setLikes("");
+
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
   };
 
   return (
