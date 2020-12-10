@@ -5,7 +5,7 @@ const Blogs = ({ filterBlog, deleteBlog }) => {
     <div>
       {filterBlog.map((blog, i) => (
         <div key={i}>
-          <h3>{blog.title}</h3>
+          <h2>{blog.title}</h2>
           <p>
             <i>{blog.author}</i>
           </p>

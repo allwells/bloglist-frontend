@@ -15,16 +15,24 @@ const BlogForm = ({
     <div>
       <form onSubmit={addBlog}>
         <div>
-          Title: <input value={newTitle} onChange={titleChange} />
+          <input
+            value={newTitle}
+            onChange={titleChange}
+            placeholder="Blog title"
+          />
         </div>
         <div>
-          Author: <input value={newAuthor} onChange={authorChange} />
+          <input
+            value={newAuthor}
+            onChange={authorChange}
+            placeholder="Author"
+          />
         </div>
         <div>
-          URL: <input value={newURL} onChange={urlChange} />
+          <input value={newURL} onChange={urlChange} placeholder="Url" />
         </div>
         <div>
-          Likes: <input value={newLikes} onChange={likesChange} />
+          <input value={newLikes} onChange={likesChange} placeholder="Likes" />
         </div>
         <div>
           <button type="submit">Add Blog</button>
