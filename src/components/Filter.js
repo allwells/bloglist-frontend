@@ -6,7 +6,7 @@ const Filter = ({ newFilter, filterChange }) => {
       <input
         value={newFilter}
         onChange={filterChange}
-        placeholder="Search blogs titles"
+        placeholder="Search blog by authors"
       />
     </div>
   );

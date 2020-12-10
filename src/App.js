@@ -40,7 +40,7 @@ const App = () => {
 
   const filterBlogs = blogs
     ? blogs.filter((blog) =>
-        blog.title.toLowerCase().includes(newFilter.toLowerCase())
+        blog.author.toLowerCase().includes(newFilter.toLowerCase())
       )
     : [];
 
