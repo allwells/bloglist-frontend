@@ -129,10 +129,10 @@ const App = () => {
 
   return (
     <div>
-      <h2>Bloglist</h2>
+      <h1>Blog List</h1>
       <Notification message={message} messageType={messageType} />
       <Filter newFilter={newFilter} filterChange={filterChange} />
-      <h3>Add a new blog</h3>
+      <h2>Add a new blog</h2>
       <BlogForm
         addBlog={AddBlog}
         newTitle={title}
@@ -144,7 +144,7 @@ const App = () => {
         urlChange={urlChange}
         likesChange={likesChange}
       />
-      <h3>Blogs</h3>
+      <h2>Blogs</h2>
       <Blogs filterBlog={filterBlogs} deleteBlog={deleteBlogs} />
     </div>
   );
