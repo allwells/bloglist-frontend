@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Filter from "./components/Filter";
-import Persons from "./components/Persons";
-import PersonForm from "./components/PersonForm";
+import Blogs from "./components/Blogs";
+import BlogForm from "./components/BlogForm";
 import service from "./services/service";
 import Notification from "./components/Notification";
 
@@ -12,8 +12,8 @@ const App = () => {
   const [url, setUrl] = useState("");
   const [likes, setLikes] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [msgType, setMsgType] = useState("");
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState("");
 
   useEffect(() => {
     service.getAll().then((response) => {
@@ -67,19 +67,19 @@ const App = () => {
               setBlogs(
                 blogs.map((blog) => (blog.id !== response.id ? blog : response))
               );
-              setMsgType("success");
-              setErrorMessage(`${title} has been updated`);
+              setMessageType("success");
+              setMessage(`${title} has been updated`);
               setTimeout(() => {
-                setErrorMessage(null);
+                setMessage(null);
               }, 5000);
             })
             .catch((error) => {
-              setMsgType("error");
-              setErrorMessage(
+              setMessageType("error");
+              setMessage(
                 `Information of ${title} has already been removed from server!`
               );
               setTimeout(() => {
-                setErrorMessage(null);
+                setMessage(null);
               }, 5000);
               setBlogs(blogs.filter((blog) => blog.id !== check.id));
             })
@@ -100,10 +100,10 @@ const App = () => {
     setAuthor("");
     setUrl("");
     setLikes("");
-    setMsgType("success");
-    setErrorMessage(`Added ${title}`);
+    setMessageType("success");
+    setMessage(`Added ${title}`);
     setTimeout(() => {
-      setErrorMessage(null);
+      setMessage(null);
     }, 5000);
   };
 
@@ -118,20 +118,20 @@ const App = () => {
               setAuthor("");
               setUrl("");
               setLikes("");
-              setMsgType("success");
-              setErrorMessage(`Deleted ${titles}`);
+              setMessageType("success");
+              setMessage(`Deleted ${titles}`);
               setTimeout(() => {
-                setErrorMessage(null);
+                setMessage(null);
               }, 5000);
             }
           })
           .catch((error) => {
-            setMsgType("error");
-            setErrorMessage(
+            setMessageType("error");
+            setMessage(
               `Information of ${titles} has already been removed from server!`
             );
             setTimeout(() => {
-              setErrorMessage(null);
+              setMessage(null);
             }, 5000);
             setBlogs(blogs.filter((blog) => blog.id !== id));
           })
@@ -141,10 +141,10 @@ const App = () => {
   return (
     <div>
       <h2>Bloglist</h2>
-      <Notification message={errorMessage} messageType={msgType} />
+      <Notification message={message} messageType={messageType} />
       <Filter newFilter={newFilter} filterChange={filterChange} />
       <h3>Add a new blog</h3>
-      <PersonForm
+      <BlogForm
         addBlog={AddBlog}
         newTitle={title}
         newAuthor={author}
@@ -156,7 +156,7 @@ const App = () => {
         likesChange={likesChange}
       />
       <h3>Blogs</h3>
-      <Persons filterBlog={filterBlogs} deleteBlog={deleteBlogs} />
+      <Blogs filterBlog={filterBlogs} deleteBlog={deleteBlogs} />
     </div>
   );
 };
