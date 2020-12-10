@@ -6,60 +6,69 @@ import service from "./services/service";
 import Notification from "./components/Notification";
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
+  const [blogs, setBlogs] = useState([]);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [url, setUrl] = useState("");
+  const [likes, setLikes] = useState("");
   const [newFilter, setNewFilter] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [msgType, setMsgType] = useState("");
 
   useEffect(() => {
     service.getAll().then((response) => {
-      setPersons(response);
+      setBlogs(response);
     });
   }, []);
 
-  const nameChange = (event) => {
-    setNewName(event.target.value);
+  const titleChange = (event) => {
+    setTitle(event.target.value);
   };
-  const numberChange = (event) => {
-    setNewNumber(event.target.value);
+  const authorChange = (event) => {
+    setAuthor(event.target.value);
   };
+  const urlChange = (event) => {
+    setUrl(event.target.value);
+  };
+  const likesChange = (event) => {
+    setLikes(event.target.value);
+  };
+
   const filterChange = (event) => {
     setNewFilter(event.target.value);
   };
 
-  const filterPerson = persons
-    ? persons.filter((person) =>
-        person.name.toLowerCase().includes(newFilter.toLowerCase())
+  const filterBlogs = blogs
+    ? blogs.filter((blog) =>
+        blog.name.toLowerCase().includes(newFilter.toLowerCase())
       )
     : [];
 
-  const AddPerson = (event) => {
+  const AddBlog = (event) => {
     event.preventDefault();
-    const personObject = {
-      name: newName,
-      number: newNumber,
+    const blogObject = {
+      title: title,
+      author: author,
+      url: url,
+      likes: likes,
     };
 
-    const check = persons.find(
-      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    const check = blogs.find(
+      (blog) => blog.name.toLowerCase() === title.toLowerCase()
     );
 
     if (check) {
       window.confirm(
-        `${newName} is already added to phonebook, replace old number with a new one?`
+        `${title} is already added to phonebook, replace old number with a new one?`
       )
         ? service
-            .update(check.id, personObject)
+            .update(check.id, blogObject)
             .then((response) => {
-              setPersons(
-                persons.map((person) =>
-                  person.id !== response.id ? person : response
-                )
+              setBlogs(
+                blogs.map((blog) => (blog.id !== response.id ? blog : response))
               );
               setMsgType("success");
-              setErrorMessage(`${newName} has been updated`);
+              setErrorMessage(`${title} has been updated`);
               setTimeout(() => {
                 setErrorMessage(null);
               }, 5000);
@@ -67,39 +76,50 @@ const App = () => {
             .catch((error) => {
               setMsgType("error");
               setErrorMessage(
-                `Information of ${newName} has already been removed from server!`
+                `Information of ${title} has already been removed from server!`
               );
               setTimeout(() => {
                 setErrorMessage(null);
               }, 5000);
-              setPersons(persons.filter((n) => n.id !== check.id));
+              setBlogs(blogs.filter((blog) => blog.id !== check.id));
             })
         : console.log("");
     }
 
-    service.create({ name: newName, number: newNumber }).then((response) => {
-      setPersons(persons.concat(response));
-    });
-    setNewName("");
-    setNewNumber("");
+    service
+      .create({
+        title: title,
+        author: author,
+        url: url,
+        likes: likes,
+      })
+      .then((response) => {
+        setBlogs(blogs.concat(response));
+      });
+    setTitle("");
+    setAuthor("");
+    setUrl("");
+    setLikes("");
     setMsgType("success");
-    setErrorMessage(`Added ${newName}`);
+    setErrorMessage(`Added ${title}`);
     setTimeout(() => {
       setErrorMessage(null);
     }, 5000);
   };
 
-  const deletePerson = (id, name) => {
-    window.confirm(`Delete ${name}?`)
+  const deleteBlogs = (id, titles) => {
+    window.confirm(`Delete ${titles}?`)
       ? service
           .remove(id)
           .then((response) => {
             if (response.status === 200) {
-              setPersons(persons.filter((person) => person.id !== id));
-              setNewName("");
-              setNewNumber("");
+              setBlogs(blogs.filter((blog) => blog.id !== id));
+              setTitle("");
+              setAuthor("");
+              setUrl("");
+              setLikes("");
               setMsgType("success");
-              setErrorMessage(`Deleted ${name}`);
+              setErrorMessage(`Deleted ${titles}`);
               setTimeout(() => {
                 setErrorMessage(null);
               }, 5000);
@@ -108,12 +128,12 @@ const App = () => {
           .catch((error) => {
             setMsgType("error");
             setErrorMessage(
-              `Information of ${name} has already been removed from server!`
+              `Information of ${titles} has already been removed from server!`
             );
             setTimeout(() => {
               setErrorMessage(null);
             }, 5000);
-            setPersons(persons.filter((n) => n.id !== id));
+            setBlogs(blogs.filter((blog) => blog.id !== id));
           })
       : console.log();
   };
@@ -125,14 +145,18 @@ const App = () => {
       <Filter newFilter={newFilter} filterChange={filterChange} />
       <h3>Add a new blog</h3>
       <PersonForm
-        addPerson={AddPerson}
-        newName={newName}
-        newNumber={newNumber}
-        nameChange={nameChange}
-        numberChange={numberChange}
+        addBlog={AddBlog}
+        newTitle={title}
+        newAuthor={author}
+        newURL={url}
+        newLikes={likes}
+        titleChange={titleChange}
+        authorChange={authorChange}
+        urlChange={urlChange}
+        likesChange={likesChange}
       />
       <h3>Blogs</h3>
-      <Persons filterPerson={filterPerson} deletePerson={deletePerson} />
+      <Persons filterBlog={filterBlogs} deleteBlog={deleteBlogs} />
     </div>
   );
 };

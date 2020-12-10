@@ -7,13 +7,13 @@ const getAll = () => {
   return req.then((res) => res.data);
 };
 
-const create = (personObject) => {
-  const req = axios.post(URL, personObject);
+const create = (blogObject) => {
+  const req = axios.post(URL, blogObject);
   return req.then((res) => res.data);
 };
 
-const update = (id, personObject) => {
-  const req = axios.put(`${URL}/${id}`, personObject);
+const update = (id, blogObject) => {
+  const req = axios.put(`${URL}/${id}`, blogObject);
   return req.then((res) => res.data);
 };
 

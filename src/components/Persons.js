@@ -1,18 +1,16 @@
 import React from "react";
 
-const Persons = ({ filterPerson, deletePerson }) => {
+const Blogs = ({ filterBlog, deleteBlog }) => {
   return (
     <div>
-      {filterPerson.map((person, i) => (
+      {filterBlog.map((blog, i) => (
         <p key={i}>
-          {person.name}: {person.number}{" "}
-          <button onClick={() => deletePerson(person.id, person.name)}>
-            Delete
-          </button>
+          {blog.title}: {blog.author}{" "}
+          <button onClick={() => deleteBlog(blog.id, blog.name)}>Delete</button>
         </p>
       ))}
     </div>
   );
 };
 
-export default Persons;
+export default Blogs;
