@@ -40,72 +40,9 @@ const App = () => {
 
   const filterBlogs = blogs
     ? blogs.filter((blog) =>
-        blog.name.toLowerCase().includes(newFilter.toLowerCase())
+        blog.title.toLowerCase().includes(newFilter.toLowerCase())
       )
     : [];
-
-  // const AddBlog = (event) => {
-  //   event.preventDefault();
-  //   const blogObject = {
-  //     title: title,
-  //     author: author,
-  //     url: url,
-  //     likes: likes,
-  //   };
-
-  //   const check = blogs.find(
-  //     (blog) => blog.name.toLowerCase() === title.toLowerCase()
-  //   );
-
-  //   if (check) {
-  //     window.confirm(
-  //       `${title} is already added to phonebook, replace old number with a new one?`
-  //     )
-  //       ? service
-  //           .update(check.id, blogObject)
-  //           .then((response) => {
-  //             setBlogs(
-  //               blogs.map((blog) => (blog.id !== response.id ? blog : response))
-  //             );
-  //             setMessageType("success");
-  //             setMessage(`${title} has been updated`);
-  //             setTimeout(() => {
-  //               setMessage(null);
-  //             }, 5000);
-  //           })
-  //           .catch((error) => {
-  //             setMessageType("error");
-  //             setMessage(
-  //               `Information of ${title} has already been removed from server!`
-  //             );
-  //             setTimeout(() => {
-  //               setMessage(null);
-  //             }, 5000);
-  //             setBlogs(blogs.filter((blog) => blog.id !== check.id));
-  //           })
-  //       : console.log("");
-  //   }
-
-  //   service
-  //     .create({
-  //       title: title,
-  //       author: author,
-  //       url: url,
-  //       likes: likes,
-  //     })
-  //     .then((response) => {
-  //       setBlogs(blogs.concat(response));
-  //     });
-  //   setTitle("");
-  //   setAuthor("");
-  //   setUrl("");
-  //   setLikes("");
-  //   setMessageType("success");
-  //   setMessage(`Added ${title}`);
-  //   setTimeout(() => {
-  //     setMessage(null);
-  //   }, 5000);
-  // };
 
   const deleteBlogs = (id, titles) => {
     window.confirm(`Delete ${titles}?`)
@@ -214,3 +151,66 @@ const App = () => {
 };
 
 export default App;
+
+// const AddBlog = (event) => {
+//   event.preventDefault();
+//   const blogObject = {
+//     title: title,
+//     author: author,
+//     url: url,
+//     likes: likes,
+//   };
+
+//   const check = blogs.find(
+//     (blog) => blog.name.toLowerCase() === title.toLowerCase()
+//   );
+
+//   if (check) {
+//     window.confirm(
+//       `${title} is already added to phonebook, replace old number with a new one?`
+//     )
+//       ? service
+//           .update(check.id, blogObject)
+//           .then((response) => {
+//             setBlogs(
+//               blogs.map((blog) => (blog.id !== response.id ? blog : response))
+//             );
+//             setMessageType("success");
+//             setMessage(`${title} has been updated`);
+//             setTimeout(() => {
+//               setMessage(null);
+//             }, 5000);
+//           })
+//           .catch((error) => {
+//             setMessageType("error");
+//             setMessage(
+//               `Information of ${title} has already been removed from server!`
+//             );
+//             setTimeout(() => {
+//               setMessage(null);
+//             }, 5000);
+//             setBlogs(blogs.filter((blog) => blog.id !== check.id));
+//           })
+//       : console.log("");
+//   }
+
+//   service
+//     .create({
+//       title: title,
+//       author: author,
+//       url: url,
+//       likes: likes,
+//     })
+//     .then((response) => {
+//       setBlogs(blogs.concat(response));
+//     });
+//   setTitle("");
+//   setAuthor("");
+//   setUrl("");
+//   setLikes("");
+//   setMessageType("success");
+//   setMessage(`Added ${title}`);
+//   setTimeout(() => {
+//     setMessage(null);
+//   }, 5000);
+// };
