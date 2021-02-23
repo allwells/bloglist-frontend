@@ -20,16 +20,17 @@ body {
 
 .mainLayout {
   width: 40%;
-  height: 60%;
+  height: fit-content;
   background-color: whitesmoke;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   place-items: center;
+  padding: 2em 0;
 }
+
 .mainHeading {
-  margin: 1em 0;
-  margin-bottom: 1em;
+  margin: 0 0 1em 0;
 }
 
 @media (max-width: 540px) {
