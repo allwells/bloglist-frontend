@@ -15,6 +15,7 @@ const StyledFilter = styled.div`
     border-radius: 2px;
     color: #000000aa;
     transition-duration: 0.4s;
+    margin-bottom: 1.5em;
 
     &:hover {
       box-shadow: 0 0 8px #bbbbbb;
