@@ -132,7 +132,6 @@ const App = () => {
       <h1 className="mainHeading">Blog List</h1>
       <Notification message={message} messageType={messageType} />
       <Filter newFilter={newFilter} filterChange={filterChange} />
-      <h2>Add a new blog</h2>
       <BlogForm
         addBlog={AddBlog}
         newTitle={title}
@@ -144,7 +143,6 @@ const App = () => {
         urlChange={urlChange}
         likesChange={likesChange}
       />
-      <h2>Blogs</h2>
       <Blogs filterBlog={filterBlogs} deleteBlog={deleteBlogs} />
     </div>
   );

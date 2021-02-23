@@ -4,14 +4,19 @@ import StyledBlogs from "./Blogs.styled";
 const Blogs = ({ filterBlog, deleteBlog }) => {
   return (
     <StyledBlogs>
+      <h2>Blogs</h2>
       {filterBlog.map((blog, i) => (
-        <div key={i}>
+        <div className="blogs" key={i}>
           <h3>{blog.title}</h3>
           <p>
-            Author: <i>{blog.author}</i>
+            <b>Author:</b> <i>{blog.author}</i>
           </p>
-          <p>URL: {blog.url}</p>
-          <p>Likes: {blog.likes}</p>
+          <p>
+            <b>URL:</b> {blog.url}
+          </p>
+          <p>
+            <b>Likes:</b> {blog.likes}
+          </p>
           <button onClick={() => deleteBlog(blog.id, blog.title)}>
             Delete Blog
           </button>

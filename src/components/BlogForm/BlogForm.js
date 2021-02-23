@@ -14,29 +14,44 @@ const BlogForm = ({
 }) => {
   return (
     <StyledBlogForm>
+      <h2>Add Blog</h2>
       <form onSubmit={addBlog}>
-        <div>
+        <div className="blogInput">
           <input
+            className="textField"
             value={newTitle}
             onChange={titleChange}
-            placeholder="Blog title"
+            placeholder="Title"
           />
         </div>
-        <div>
+        <div className="blogInput">
           <input
+            className="textField"
             value={newAuthor}
             onChange={authorChange}
             placeholder="Author"
           />
         </div>
-        <div>
-          <input value={newURL} onChange={urlChange} placeholder="Url" />
+        <div className="blogInput">
+          <input
+            className="textField"
+            value={newURL}
+            onChange={urlChange}
+            placeholder="Url"
+          />
         </div>
-        <div>
-          <input value={newLikes} onChange={likesChange} placeholder="Likes" />
+        <div className="blogInput">
+          <input
+            className="textField"
+            value={newLikes}
+            onChange={likesChange}
+            placeholder="Likes"
+          />
         </div>
-        <div>
-          <button type="submit">Add Blog</button>
+        <div className="blogInput">
+          <button className="addBlogButton" type="submit">
+            Add Blog
+          </button>
         </div>
       </form>
     </StyledBlogForm>

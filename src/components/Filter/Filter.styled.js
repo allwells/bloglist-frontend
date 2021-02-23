@@ -6,7 +6,7 @@ const StyledFilter = styled.div`
   place-items: center;
   width: 100%;
 
-  .filter {
+  .textField {
     height: 30px;
     width: 80%;
     text-align: center;
@@ -16,6 +16,7 @@ const StyledFilter = styled.div`
     color: #000000aa;
     transition-duration: 0.4s;
     margin-bottom: 1.5em;
+    background-color: #f5f5f5;
 
     &:hover {
       box-shadow: 0 0 8px #bbbbbb;

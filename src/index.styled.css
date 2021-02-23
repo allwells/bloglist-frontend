@@ -14,14 +14,15 @@ body {
   flex-direction: column;
   justify-content: center;
   place-items: center;
-  height: 100vh;
   align-self: center;
+  margin: 3em 5em;
+  box-shadow: 0 0 25px #dddddd;
+  border-radius: 5px;
 }
 
 .mainLayout {
-  width: 40%;
+  width: 60%;
   height: fit-content;
-  background-color: whitesmoke;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -31,10 +32,15 @@ body {
 
 .mainHeading {
   margin: 0 0 1em 0;
+  color: #800000;
 }
 
 @media (max-width: 540px) {
   .mainLayout {
-    width: 70%;
+    width: 80%;
+  }
+
+  #root {
+    margin: 1em 2em;
   }
 }

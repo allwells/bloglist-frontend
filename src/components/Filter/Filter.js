@@ -5,7 +5,7 @@ const Filter = ({ newFilter, filterChange }) => {
   return (
     <StyledFilter>
       <input
-        className="filter"
+        className="textField"
         value={newFilter}
         onChange={filterChange}
         placeholder="Search authors"
