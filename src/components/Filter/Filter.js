@@ -1,14 +1,16 @@
 import React from "react";
+import StyledFilter from "./Filter.styled";
 
 const Filter = ({ newFilter, filterChange }) => {
   return (
-    <div>
+    <StyledFilter>
       <input
+        className="filter"
         value={newFilter}
         onChange={filterChange}
-        placeholder="Search blog by authors"
+        placeholder="Search authors"
       />
-    </div>
+    </StyledFilter>
   );
 };
 

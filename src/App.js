@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Filter from "./components/Filter";
-import Blogs from "./components/Blogs";
-import BlogForm from "./components/BlogForm";
+import Filter from "./components/Filter/Filter";
+import Blogs from "./components/Blogs/Blogs";
+import BlogForm from "./components/BlogForm/BlogForm";
 import service from "./services/service";
-import Notification from "./components/Notification";
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -128,8 +128,8 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Blog List</h1>
+    <div className="mainLayout">
+      <h1 className="mainHeading">Blog List</h1>
       <Notification message={message} messageType={messageType} />
       <Filter newFilter={newFilter} filterChange={filterChange} />
       <h2>Add a new blog</h2>

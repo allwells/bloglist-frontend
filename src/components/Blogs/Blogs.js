@@ -1,8 +1,9 @@
 import React from "react";
+import StyledBlogs from "./Blogs.styled";
 
 const Blogs = ({ filterBlog, deleteBlog }) => {
   return (
-    <div>
+    <StyledBlogs>
       {filterBlog.map((blog, i) => (
         <div key={i}>
           <h3>{blog.title}</h3>
@@ -16,7 +17,7 @@ const Blogs = ({ filterBlog, deleteBlog }) => {
           </button>
         </div>
       ))}
-    </div>
+    </StyledBlogs>
   );
 };
 

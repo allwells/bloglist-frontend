@@ -1,4 +1,5 @@
 import React from "react";
+import StyledBlogForm from "./BlogForm.styled";
 
 const BlogForm = ({
   addBlog,
@@ -12,7 +13,7 @@ const BlogForm = ({
   likesChange,
 }) => {
   return (
-    <div>
+    <StyledBlogForm>
       <form onSubmit={addBlog}>
         <div>
           <input
@@ -38,7 +39,7 @@ const BlogForm = ({
           <button type="submit">Add Blog</button>
         </div>
       </form>
-    </div>
+    </StyledBlogForm>
   );
 };
 
