@@ -44,8 +44,8 @@ const App = () => {
       )
     : [];
 
-  const deleteBlogs = (id, titles) => {
-    window.confirm(`Delete ${titles}?`)
+  const deleteBlogs = (id, titles, authors) => {
+    window.confirm(`Delete ${titles} by ${authors}?`)
       ? service
           .remove(id)
           .then((response) => {
@@ -56,7 +56,7 @@ const App = () => {
               setUrl("");
               setLikes("");
               setMessageType("success");
-              setMessage(`Deleted ${titles}`);
+              setMessage(`Deleted ${titles} by ${authors}`);
               setTimeout(() => {
                 setMessage(null);
               }, 5000);
@@ -82,7 +82,7 @@ const App = () => {
     );
     if (bloglist) {
       const choice = window.confirm(
-        `${title} is already added to phonebook, replace the old number with a new one?`
+        `${title} is already added to bloglist, replace the old blog with a new one?`
       );
       if (choice) {
         service
@@ -95,7 +95,7 @@ const App = () => {
           .then((res) => {
             setBlogs(blogs.map((blog) => (blog.id !== res.id ? blog : res)));
             setMessageType("success");
-            setMessage(`Changed ${bloglist.title}`);
+            setMessage(`Changed ${bloglist.title} by ${bloglist.author}`);
           })
           .catch((err) => console.log(err));
       }
@@ -110,7 +110,7 @@ const App = () => {
         .then((blog) => {
           setBlogs([...blogs, blog]);
           setMessageType("success");
-          setMessage(`Added ${blog.title}`);
+          setMessage(`Added ${blog.title} by ${blog.author}`);
         })
         .catch((err) => {
           setMessageType("error");
