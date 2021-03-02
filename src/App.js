@@ -45,16 +45,15 @@ const App = () => {
     : [];
 
   const deleteBlogs = (id, titles, authors) => {
-    window.confirm(`Delete ${titles} by ${authors}?`)
+    console.log("before alert");
+    window.confirm(`Delete ${titles} by ${authors}?`);
+    console.log("after alert")
       ? service
           .remove(id)
-          .then((response) => {
-            if (response.status === 200) {
+          .then((res) => {
+            if (res.status === 200) {
+              console.log("status code: ", res.status);
               setBlogs(blogs.filter((blog) => blog.id !== id));
-              setTitle("");
-              setAuthor("");
-              setUrl("");
-              setLikes("");
               setMessageType("success");
               setMessage(`Deleted ${titles} by ${authors}`);
               setTimeout(() => {
@@ -65,14 +64,14 @@ const App = () => {
           .catch((error) => {
             setMessageType("error");
             setMessage(
-              `Information of ${titles} has already been removed from server!`
+              `'${titles}' by ${authors} has already been removed from server!`
             );
             setTimeout(() => {
               setMessage(null);
             }, 5000);
             setBlogs(blogs.filter((blog) => blog.id !== id));
           })
-      : console.log();
+      : console.log("Last option");
   };
 
   const AddBlog = (event) => {
@@ -82,7 +81,7 @@ const App = () => {
     );
     if (bloglist) {
       const choice = window.confirm(
-        `${title} is already added to bloglist, replace the old blog with a new one?`
+        `${title} by ${author} is already added to bloglist, replace the old blog with a new one?`
       );
       if (choice) {
         service

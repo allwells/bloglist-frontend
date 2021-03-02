@@ -17,7 +17,7 @@ const Blogs = ({ filterBlog, deleteBlog }) => {
           <p>
             <b>Likes:</b> {blog.likes}
           </p>
-          <button onClick={() => deleteBlog(blog.id, blog.title)}>
+          <button onClick={() => deleteBlog(blog.id, blog.title, blog.author)}>
             Delete Blog
           </button>
         </div>
